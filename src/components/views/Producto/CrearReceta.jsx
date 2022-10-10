@@ -1,42 +1,47 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Form, Button } from "react-bootstrap";
 
 const CrearReceta = () => {
-return (
-    <div className="container">
-        <div>
-            <h2>Nueva Receta</h2>
-            <hr></hr>
-
-        </div>
-    <Form>
-      <Form.Group className="mb-3" controlId="nuevoNombreReceta">
-        <Form.Label>Nombre Receta</Form.Label>
-        <Form.Control type="text" placeholder="Ej. Café" />
-       </Form.Group>
-       <Form.Group className="mb-3" controlId="nuevoDuracion">
-        <Form.Label>Duración</Form.Label>
-        <Form.Control type="text" placeholder="Ej. 50" />
-       </Form.Group>
-       <Form.Group className="mb-3" controlId="nuevoImagen">
-        <Form.Label>Imagen URL</Form.Label>
-        <Form.Control type="text" placeholder="https://images.pexels.com/photos/887853" />
-       </Form.Group>
-       <Form.Group className="mb-3">
-        <Form.Label>Categoría</Form.Label>
-        <Form.Select>
-          <option>Dulce</option>
-          <option>Salado</option>
-        </Form.Select>
-      </Form.Group>
-      <Button variant="primary" type="submit">
-       Guardar
-      </Button>
-    </Form>
-    </div>
+  return (
+    <section className="container mainSection">
+      <h1 className="display-4 mt-5">Nueva Receta</h1>
+      <hr />
+      {/* <Form onSubmit={handleSubmit}> */}
+      <Form>
+        <Form.Group className="mb-3" controlId="formNombreReceta">
+          <Form.Label>Nombre receta*</Form.Label>
+          <Form.Control type="text" placeholder="Ej: Cafe" />
+          <Form.Text className="text-danger">algun error</Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDuracion">
+          <Form.Label>Precio*</Form.Label>
+          <Form.Control type="number" placeholder="Ej: 50" />
+          <Form.Text className="text-danger">algun error</Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formImagen">
+          <Form.Label>Imagen URL*</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
+          />
+          <Form.Text className="text-danger">algun error</Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDuracion">
+          <Form.Label>Categoria*</Form.Label>
+          <Form.Select>
+            <option value="">Seleccione una opcion</option>
+            <option value="comida-caliente">Comida caliente</option>
+            <option value="comida-fria">Comida fria</option>
+            <option value="dulce">Dulce</option>
+            <option value="salado">Salado</option>
+          </Form.Select>
+          <Form.Text className="text-danger">algun error</Form.Text>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Guardar
+        </Button>
+      </Form>
+    </section>
   );
-}
+};
 
 export default CrearReceta;

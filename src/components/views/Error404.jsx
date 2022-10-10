@@ -1,10 +1,8 @@
-import React from 'react';
-
 const Error404 = () => {
     return (
-        <div>
-            <h1>Página Error 404</h1>
-        </div>
+        <section className="mainSection">
+            <h1>pagina de error</h1>
+        </section>
     );
 };
 

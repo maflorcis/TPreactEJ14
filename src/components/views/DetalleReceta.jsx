@@ -1,24 +1,22 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
+import { Badge, Card, Col, Row } from 'react-bootstrap';
 
-function DetalleReceta() {
-  return (
-    <div className="container">
-    <Card style={{display: 'flex', flexDirection: 'row'}}>
-      <Card.Img variant="top  w-25 " src="https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-      <Card.Body>
-        <Card.Title>Brownie</Card.Title>
-        <Card.Text>
-        <hr></hr>
-        <Badge bg="success">Dulce</Badge>
-        <p className="my-3 fw-bold">Precio: $300</p>
-        </Card.Text>
-       </Card.Body>
-    </Card>
-    </div>
-  );
-}
+const DetalleReceta = () => {
+    
+    return (
+        <Card className='container my-5 mainSection'>
+            <Row className='w-75'>
+                <Col md={6}>
+                    <img src='https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='brownie' className="w-100" />
+                </Col>
+                <Col md={6} className="py-3">
+                <h3>Brownie</h3>
+                <hr/>
+                <Badge bg="success">Dulce</Badge>
+                <p className='mt-3'><b>Precio: $300</b></p>
+                </Col>
+            </Row>
+        </Card>
+    );
+};
 
 export default DetalleReceta;

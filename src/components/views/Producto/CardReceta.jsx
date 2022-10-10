@@ -1,23 +1,23 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import { Button, Card } from "react-bootstrap";
 
-
-function CardReceta() {
+const CardReceta = () => {
   return (
-    <Card className="col-12 col-md-4 col-lg-3" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+    <Card className="my-4">
+      <Card.Img
+        variant="top"
+        src="https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        className="img-fluid"
+      />
       <Card.Body>
         <Card.Title>Brownie</Card.Title>
-        <Card.Text>
-             <p className="my-3">Duración: 2 hs</p>
-         <hr></hr>
-        </Card.Text>
-        <Button variant="danger">Ver más</Button>
+        <Card.Text>Duración: 40</Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <Button className="btn btn-danger me-2">Ver más</Button>
+      </Card.Footer>
     </Card>
   );
-}
+};
 
 export default CardReceta;

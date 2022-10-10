@@ -1,25 +1,27 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-
+import { Navbar, Nav, Container} from "react-bootstrap";
+import {Link, NavLink} from 'react-router-dom';
 
 const Menu = () => {
-    return (
- <>
-      <Navbar bg="danger" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Blog de recetas</Navbar.Brand>
+  return (
+    <Navbar bg="danger" variant="dark" expand="lg">
+      <Container>
+        <Navbar.Brand as={Link} to='/'>
+          Recetas Florencia
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Inicio</Nav.Link>
-            <Nav.Link href="#features">Administrar</Nav.Link>
+            <NavLink className="nav-item nav-link" to='/'>
+              Inicio
+            </NavLink>
+          <NavLink className="nav-item nav-link" to='/administrador'>
+            Administrar
+          </NavLink>
           </Nav>
-        </Container>
-      </Navbar>
-     
-    </>
-    );
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default Menu;
