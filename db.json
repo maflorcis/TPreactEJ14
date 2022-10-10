@@ -1,0 +1,35 @@
+{
+    "recetas":[
+        {
+            "nombreReceta":"café",
+            "duracion": 40,
+            "categoria": "comida-fria", 
+            "imagen": "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "id": 1
+        },
+
+        {
+            "nombreReceta":"torta",
+            "duracion": 120,
+            "categoria": "comida-caliente", 
+            "imagen": "https://images.pexels.com/photos/10342005/pexels-photo-10342005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "id": 2
+        },
+        {
+            "nombreReceta":"pollo horneado",
+            "duracion": 130,
+            "categoria": "comida-caliente", 
+            "imagen": "https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "id": 3
+        },
+        {
+            "nombreReceta":"ensalada cesar",
+            "duracion": 30,
+            "categoria": "comida-fria", 
+            "imagen": "https://images.pexels.com/photos/6107787/pexels-photo-6107787.jpeg?cs=srgb&dl=pexels-alleksana-6107787.jpg&fm=jpg",
+            "id": 4
+        }
+
+              ]
+}
+
