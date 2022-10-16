@@ -1,47 +1,127 @@
-import { Form, Button } from "react-bootstrap";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import { crearRecetaAPI } from "../../helpers/queries";
+import { useNavigate} from "react-router-dom"
 
 const CrearReceta = () => {
-  return (
-    <section className="container mainSection">
-      <h1 className="display-4 mt-5">Nueva Receta</h1>
-      <hr />
-      {/* <Form onSubmit={handleSubmit}> */}
-      <Form>
-        <Form.Group className="mb-3" controlId="formNombreReceta">
-          <Form.Label>Nombre receta*</Form.Label>
-          <Form.Control type="text" placeholder="Ej: Cafe" />
-          <Form.Text className="text-danger">algun error</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formDuracion">
-          <Form.Label>Precio*</Form.Label>
-          <Form.Control type="number" placeholder="Ej: 50" />
-          <Form.Text className="text-danger">algun error</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formImagen">
-          <Form.Label>Imagen URL*</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
-          />
-          <Form.Text className="text-danger">algun error</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formDuracion">
-          <Form.Label>Categoria*</Form.Label>
-          <Form.Select>
-            <option value="">Seleccione una opcion</option>
+
+const {register, handleSubmit, formState:{errors}, reset} = useForm( 
+  {defaultValues: {
+    nombreReceta: "",
+    duracion: 1,
+    imagen: '',
+    categoría:   ''
+  }});
+
+// inicializar la navegación
+const navegacion = useNavigate();
+
+const onSubmit = (datos) =>{
+  // los datos ya están validados
+  console.log(datos)
+  // enviar los datos a la api
+  crearRecetaAPI(datos).then((respuesta)=>{
+    if(respuesta.status === 201){
+      // la receta se creó
+      Swal.fire('Receta creado', 'La receta fue creada correctamente', 'success')
+      reset();
+      navegacion ('/administrador');
+    }else{
+      //mostrar 
+      Swal.fire('Receta no creado', 'Vuelva a intentar nuevamente', 'error')
+    }
+    
+  })
+}
+
+
+return (
+    <div className="container">
+        <div>
+            <h2>Nueva Receta</h2>
+            <hr></hr>
+
+        </div>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form.Group className="mb-3" controlId="nuevoNombreReceta">
+        <Form.Label>Nombre Receta</Form.Label>
+        <Form.Control 
+        type="text" 
+        placeholder="Ej. Café"
+        {...register('nombreReceta', {
+          required:'Este dato es obligatorio', 
+          minLength: {
+            value: 2,
+            message: 'Debe ingresar como mínimo 2 caracteres'
+          },
+          maxLength:{
+            value: 50,
+            message: 'Debe ingresar como máximo 20 caracteres'
+          }
+        
+        })} />
+       <Form.Text className="text-danger">{errors.nombreReceta?.message}</Form.Text>
+       </Form.Group>
+       <Form.Group className="mb-3" controlId="nuevoDuracion">
+        <Form.Label>Duracion</Form.Label>
+       
+        <Form.Control 
+        type="text" 
+        placeholder="Ej. 50" 
+        {...register('duracion',{
+          required: 'La duracion es un valor requerido',
+          min:{
+            value: 1,
+            message: 'La duracion como mínimo debe ser de 1'
+          },
+          max:{
+            value: 10000,
+            message: 'La duracion máxima de la receta es 10000'
+          }
+        })}
+         />
+        <Form.Text className="text-danger">{errors.duracion?.message}</Form.Text>
+       </Form.Group>
+       <Form.Group className="mb-3" controlId="nuevoImagen">          
+        
+        <Form.Label>Imagen URL</Form.Label>
+        <Form.Control type="text" placeholder="https://images.pexels.com/photos/887853" 
+        {...register('imagen',{
+          required:'La URL  de la imagen es obligatoria',
+          pattern:{
+              value: /^https?:\/\/[\w]+(\.[\w]+)+[/#?]?.*$/,
+              message:'Debe ingresar una URL válida'
+          },
+        })}
+               
+        />
+       <Form.Text className="text-danger">{errors.imagen?.message}</Form.Text>
+       </Form.Group>
+       <Form.Group className="mb-3">
+
+        <Form.Label>Categoría</Form.Label>
+        <Form.Select 
+        {...register ('categoria', {
+          required:'Debe seleccionar una categoría'
+        })}>
+           <option value="">Seleccione una opcion</option>
             <option value="comida-caliente">Comida caliente</option>
-            <option value="comida-fria">Comida fria</option>
+            <option value="comida-fria">Comidafria</option>
             <option value="dulce">Dulce</option>
             <option value="salado">Salado</option>
-          </Form.Select>
-          <Form.Text className="text-danger">algun error</Form.Text>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Guardar
-        </Button>
-      </Form>
-    </section>
+        </Form.Select>
+         <Form.Text className="text-danger">{errors.categoria?.message}</Form.Text>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+       Guardar
+      </Button>
+    </Form>
+    </div>
   );
-};
+}
 
 export default CrearReceta;

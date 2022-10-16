@@ -10,6 +10,9 @@ import DetalleReceta from './components/views/DetalleReceta';
 import Menu from './components/common/Menu';
 import Footer from './components/common/Footer';
 
+import Login from './components/views/Login'
+import Registrar from './components/views/Registrar'
+
 
 
 
@@ -35,6 +38,16 @@ function App() {
           exact
           path="/detalle-producto"
           element={<DetalleReceta></DetalleReceta>}
+        ></Route>
+        <Route
+          exact
+          path="/login"
+          element={<Login></Login>}
+        ></Route>
+        <Route
+          exact
+          path="/registrar"
+          element={<Registrar></Registrar>}
         ></Route>
           <Route path='*' element={<Error404></Error404>} />
         </Routes>
