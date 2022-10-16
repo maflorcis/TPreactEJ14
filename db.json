@@ -46,12 +46,19 @@
       "password": "1981AlonSo$",
       "id": 3
     },
-     {
+    {
       "nombre": "Mateo",
       "apellido": "Ceci",
       "mail": "mateochechi@gmail.com",
       "password": "#$ertTgjfkg2",
       "id": 4
+    },
+    {
+      "nombre": "EDUARDO PASCUAL",
+      "apellido": "Alonso",
+      "mail": "floralonso@gmail.com",
+      "password": "Contador2004$",
+      "id": 5
     }
   ]
 }
