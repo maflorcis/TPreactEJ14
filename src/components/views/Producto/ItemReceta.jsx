@@ -47,7 +47,7 @@ const ItemReceta = ({ receta, setRecetas }) => {
       {/* <td>{props.receta.id}</td> */}
       <td>{receta.id}</td>
       <td>{receta.nombreReceta}</td>
-      <td>${receta.duracion}</td>
+      <td>{receta.duracion} minutos</td>
       <td>{receta.imagen}</td>
       <td>{receta.categoria}</td>
       <td>

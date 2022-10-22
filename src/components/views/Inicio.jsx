@@ -16,10 +16,10 @@ setRecetas(respuesta)
 
 
     return (
-        <div>
+        <div className='mainSection'>
             <h1 className="my-5 text-center">BIENVENIDOS</h1>
             <hr></hr>
-            <div className="row">
+            <div className="row container">
             {
              recetas.map((receta)=> <CardReceta key={receta.id} receta={receta} setRecetas={setRecetas}></CardReceta> )
         }

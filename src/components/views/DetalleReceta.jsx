@@ -12,7 +12,7 @@ const DetalleReceta = () => {
                 <h3>Brownie</h3>
                 <hr/>
                 <Badge bg="success">Dulce</Badge>
-                <p className='mt-3'><b>Precio: $300</b></p>
+                <p className='mt-3'><b>Duración: 300 minutos</b></p>
                 </Col>
             </Row>
         </Card>
