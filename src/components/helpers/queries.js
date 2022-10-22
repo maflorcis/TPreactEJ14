@@ -36,22 +36,8 @@ export const crearRecetaAPI = async(receta)=>{
     }
 }
 
-export const editarRecetaAPI = async(receta) =>{
-    try{
-        const respuesta = await fetch (URL, {
-            method: "PUT", 
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(receta)
-        });
-        const listaRecetas = await respuesta.json();
-        // console.log(listaRecetas)
-        return listaRecetas
-    }catch(error){
-        console.log(error)
-    }
-}
+
+
 
 export const borrarRecetaAPI = async(id)=>{
     try{
@@ -78,6 +64,23 @@ export const obtenerRecetaAPI = async(id)=>{
         console.log(error);
     }
 }
+
+export const editarRecetaAPI = async(id, datosActualizados)=>{
+    try{
+        const respuesta = await fetch(URL+'/'+id,{ 
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datosActualizados)
+        });
+        
+        return respuesta;
+    }catch(error){
+        console.log(error);
+    }
+}
+
 
 const URLusuarios = 'http://localhost:3004/usuarios';
 // tipos de peticiones 
@@ -141,3 +144,4 @@ export const obtenerUsuarioAPI = async(id) =>{
         console.log(error)
     }
 }
+

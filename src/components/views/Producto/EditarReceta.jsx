@@ -4,8 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 
-import { useParams } from 'react-router-dom';
-import { obtenerRecetaAPI } from '../../helpers/queries';
+import { useParams, useNavigate } from 'react-router-dom';
+import { editarRecetaAPI, obtenerRecetaAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
 
@@ -43,11 +43,20 @@ const {register,
     categoría:   ''
   },
 });
+const navegacion = useNavigate();
 
 const onSubmit = (receta) =>{
   console.log(receta)
   //aqui quiero enviar la peticion a la api para actualizar los datos del producto
-  
+  editarRecetaAPI(id, receta).then((respuesta)=>{
+    if(respuesta.status=== 200){
+      Swal.fire('Producto Actualizado', 'El producto fue actualizado correctamente', 'success')
+      //redireccionar
+      navegacion('/administrador');
+    }else{
+      Swal.fire('Ocurrió un error', 'Intente ese paso en unos minutos', 'error')
+    }
+  })
 }
 
 
