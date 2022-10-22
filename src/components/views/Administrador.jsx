@@ -44,8 +44,8 @@ const Administrador = () => {
             <th>Duracion</th>
             <th>URL de Imagen</th>
             <th>Categoria</th>
-            <th>Opciones</th>
-          </tr>
+           <th>Opciones</th>
+           </tr>
         </thead>
         <tbody>
           {

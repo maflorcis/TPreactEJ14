@@ -41,6 +41,7 @@ useEffect(()=>{
                 <hr/>
                 <Badge bg="success">{categoria}</Badge>
                 <p className='mt-3'><b>Duración:{duracion}</b></p>
+                <p>Esta receta es un clásico de la comida argentina. Se puede servir en todas las ocasiones. Los ingredientes se encuentran fácilmente en el supermercado y la preparación no es un desafío. Fácilmente lo puede realizar un principiante y maestro de las artes culinarias</p>
                 </Col>
             </Row>
         </Card>
