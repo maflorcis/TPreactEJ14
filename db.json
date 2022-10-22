@@ -9,10 +9,10 @@
     },
     {
       "nombreReceta": "Pollo",
-      "precio": 1,
-      "imagen": "https://pics.filmaffinity.com/back_to_the_future-100822308-large.jpg",
-      "categoria": "Comida fria",
       "duracion": "20",
+      "imagen": "https://www.elespectador.com/resizer/lCDW1IUQapAQt57oLftrQ3Mu_88=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/BF5ZMLR24NHKJHJJ3L23WDFF7Q.jpg",
+      "categoría": "",
+      "categoria": "comida-caliente",
       "id": 5
     },
     {
