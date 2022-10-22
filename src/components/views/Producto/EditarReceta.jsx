@@ -1,27 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 
+import { useParams } from 'react-router-dom';
+import { obtenerRecetaAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
+
+
+
 const EditarReceta = () => {
-const {register, handleSubmit, formState:{errors}} = useForm( 
+
+const {id} =useParams();
+useEffect(()=>{
+obtenerRecetaAPI(id).then((respuesta)=>{
+  if(respuesta.status === 200){
+    //cargar los datos de la respuesta en el formulario
+    setValue('nombreReceta', respuesta.dato.nombreReceta)
+    setValue('duracion', respuesta.dato.duracion)
+    setValue('categoria', respuesta.dato.categoria)
+    setValue('imagen', respuesta.dato.imagen)
+    console.log(respuesta)
+  }else{
+    Swal.fire('Ocurrió un error', 'Intente ese paso en unos minutos', 'error')
+  }
+  
+})
+}, [])
+
+
+
+const {register, 
+  handleSubmit,
+   formState:{errors},
+   setValue
+  } = useForm( 
   {defaultValues: {
     nombreReceta: "",
     duracion: 1,
     imagen: '',
     categoría:   ''
-  }});
+  },
+});
 
-const onSubmit = (datos) =>{
-  console.log(datos)
-  console.log('desde nuestra función submit')
+const onSubmit = (receta) =>{
+  console.log(receta)
+  //aqui quiero enviar la peticion a la api para actualizar los datos del producto
+  
 }
 
 
 
+
+
   return (
-    <div className="container">
+    <div className="container mainSection">
         <div>
             <h2>Editar Receta</h2>
             <hr></hr>

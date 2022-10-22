@@ -67,7 +67,11 @@ export const borrarRecetaAPI = async(id)=>{
 export const obtenerRecetaAPI = async(id)=>{
     try{
         const respuesta = await fetch(URL+'/'+id);
-        const recetaBuscado = await respuesta.json()
+        const recetaBuscado = {
+            dato: await respuesta.json(),
+            status: respuesta.status
+        }
+         
         // console.log(listaProdutos)
         return recetaBuscado;
     }catch(error){
