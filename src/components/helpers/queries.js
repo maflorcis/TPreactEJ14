@@ -1,99 +1,95 @@
-//archivo que nos siver para hacer las consultas a la api (json-server)
+// archivo que nos sirva para hacer las consultas a la API (json-server)
 
-const URL ='http://localhost:3004/recetas';
+const URL = 'http://localhost:4006/apirecetas/recetas';
+// tipos de peticiones 
+// petición GET que trae todos los productos o un producto  
+// petición POST, crear un producto, login 
+// petición DELETE, petición para borrar
+// petición PUT, petición que pide modificar un producto
 
-// peticion GET que trae todos las recetas
-//peticion POST, crear una receta, login / guardar
-// petición DELETE, petición para borrar 
-//petición PUT, pide modificar una receta
+// peticion GET que trae todos los productos
 
 
-export const consultarAPI = async()=>{
+// petición GET que trae todos los productos
+export const consultarAPI = async() =>{
     try{
-        const respuesta = await fetch(URL);
-        const listaRecetas = await respuesta.json()
-        // console.log(listaRecetas)
-        return listaRecetas;
+
+        const respuesta = await fetch (URL);
+        const listaRecetas = await respuesta.json();
+        // console.log(listaProductos)
+        return listaRecetas
     }catch(error){
-        console.log(error);
+        console.log(error)
     }
 }
 
-export const crearRecetaAPI = async(receta)=>{
+export const creaRecetaAPI = async(producto) =>{
     try{
-        const respuesta = await fetch(URL, {
+        const respuesta = await fetch (URL, {
             method: "POST", 
-            headers:{
-                "Content-Type": "application/json"
+            headers: {
+                "Content-Type":"application/json"
             },
-            body: JSON.stringify(receta)
+            body: JSON.stringify(producto)
         });
-        const listaRecetas = await respuesta.json()
-        // console.log(listaRecetas)
         return respuesta;
     }catch(error){
-        console.log(error);
+        console.log(error)
+    }
+}
+
+export const borrarRecetaAPI = async(id) =>{
+    try{
+        const respuesta = await fetch (`${URL}/${id}`, {
+            method: "DELETE", 
+         
+        });
+        return respuesta;
+    }catch(error){
+        console.log(error)
     }
 }
 
 
-
-
-export const borrarRecetaAPI = async(id)=>{
+export const obtenerRecetaAPI = async(id) =>{
     try{
-        const respuesta = await fetch(`${URL}/${id}`,{
-            method: "DELETE"
-        });
-        return respuesta;
-    }catch(error){
-        console.log(error);
-    }
-}
 
-export const obtenerRecetaAPI = async(id)=>{
-    try{
-        const respuesta = await fetch(URL+'/'+id);
-        const recetaBuscado = {
-            dato: await respuesta.json(),
+        const respuesta = await fetch (URL+'/'+id);
+        const recetaBuscada = { 
+            dato: await respuesta.json(),                  
             status: respuesta.status
         }
-         
-        // console.log(listaProdutos)
-        return recetaBuscado;
+        return recetaBuscada
     }catch(error){
-        console.log(error);
+        console.log(error)
     }
 }
 
 export const editarRecetaAPI = async(id, datosActualizados)=>{
     try{
-        const respuesta = await fetch(URL+'/'+id,{ 
-        method: "PUT",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(datosActualizados)
+        const respuesta = await fetch(URL+'/'+id,{
+            method: "PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datosActualizados)
         });
-        
         return respuesta;
     }catch(error){
         console.log(error);
     }
 }
 
-
-const URLusuarios = 'http://localhost:3004/usuarios';
+const URLusuarios = 'http://localhost:4006/apirecetas/usuarios';
 // tipos de peticiones 
 // petición GET que trae todos los usuarios o un usuario  
 // petición POST, crear un usuario, login 
 // petición DELETE, petición para borrar
 // petición PUT, petición que pide modificar un usuario
 
-// peticion GET que trae todos los usuarios
-
 
 // petición GET que trae todos los productos
-export const consultarUsuarioAPI = async() =>{
+export const consultarUsuarioAPI = async(data) =>{
     try{
 
         const respuestaUsuarios = await fetch (URLusuarios);
@@ -133,15 +129,16 @@ export const borrarUsuarioAPI = async(id) =>{
 }
 
 
-export const obtenerUsuarioAPI = async(id) =>{
+export const obtenerUsuarioAPI = async(mail) =>{
     try{
 
-        const respuestaUsuarios = await fetch (URLusuarios+'/'+id);
-        const usuarioBuscado = await respuestaUsuarios.json();
-        // console.log(listaUsuarios)
+        const respuestaUsuarios = await fetch (URLusuarios+'/');
+        const usuarioBuscado = {
+        dato: await respuestaUsuarios.json(),
+        status: respuestaUsuarios.status
+        }
         return usuarioBuscado
     }catch(error){
         console.log(error)
     }
 }
-

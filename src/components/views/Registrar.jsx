@@ -23,7 +23,7 @@ const [passwordShown, setPasswordShown] = useState(false);
 
 const {register, handleSubmit, formState:{errors}, reset} = useForm( 
   {defaultValues: {
-    nombre:"",
+    nombreUsuario:"",
     apellido:"",
     mail: "",
     password: "",
@@ -37,7 +37,7 @@ const onSubmit = (datos) =>{
   console.log('desde nuestra función submit')
  creaUsuarioAPI(datos).then((respuesta)=>{
     if(respuesta.status === 201){
-      // el usuario se creó
+      // el producto se creó
       Swal.fire('Usuario creado', 'El usuario fue creado correctamente', 'success')
       reset();
       navegacion ('/Registrar');
@@ -66,25 +66,21 @@ const onSubmit = (datos) =>{
         <Form.Control 
         type="text" 
         placeholder="Ingrese su nombre"
-         {...register('nombre',{
-          required:'El nombre es obligatorio',
+         {...register('nombreUsuario',{
+         required:'El nombre es obligatorio',
          minLength: {
             value: 2,
             message: 'Debe ingresar como mínimo 2 caracteres'
           },
           maxLength:{
             value: 50,
-            message: 'Debe ingresar como máximo 30 caracteres'
+            message: 'Debe ingresar como máximo 50 caracteres'
           },
-          pattern:{
-              value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-          message:'Debe ingresar un nombre válido'
-            },
         
         })}
         
        />
-       <Form.Text className="text-danger">{errors.nombre?.message}</Form.Text>
+       <Form.Text className="text-danger">{errors.nombreUsuario?.message}</Form.Text>
        </Form.Group>
 
              <Form.Group className="mb-3" controlId="mail">
@@ -100,12 +96,8 @@ const onSubmit = (datos) =>{
           },
           maxLength:{
             value: 50,
-            message: 'Debe ingresar como máximo 30 caracteres'
+            message: 'Debe ingresar como máximo 50 caracteres'
           },
-          pattern:{
-              value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-          message:'Debe ingresar un apellido válido'
-            },
         
         })}
         
@@ -136,11 +128,11 @@ const onSubmit = (datos) =>{
         <Form.Control 
         type={passwordShown ? "text" : "password"} 
         placeholder="Ingrese el password" 
-         {...register('password',{
+        {...register('password',{
           required:'Es obligatorio ingresar una password',
           pattern:{
               value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-              message:'La contraseña debe tener entre 8 carateres y contener al menos: 1 minúscula, 1 mayúscula y 1 número o 1 caracter especial.'
+              message:'La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial.'
           },
         })}
         

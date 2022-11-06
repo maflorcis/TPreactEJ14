@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
-import { consultarAPI } from "../helpers/queries";
-import ItemReceta from "./Producto/ItemReceta";
-
-import { Link} from "react-router-dom";
-
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
+import { consultarAPI } from '../helpers/queries';
+import ItemReceta from './Receta/ItemReceta';
+import {Link} from 'react-router-dom';
+import '../../App.css'
 
 const Administrador = () => {
-  const [recetas, setRecetas] = useState([])
+const [recetas, setRecetas]=useState([])
 
 
-  useEffect(()=>{
+useEffect  (()=>{
+//opción 1
 
-    // opcion 1
-    consultarAPI().then((respuesta)=>{
-      console.log(respuesta)
-      setRecetas(respuesta)
-    })
+consultarAPI().then((respuesta)=>{
+console.log(respuesta)
+setRecetas(respuesta)
+})
 
     // opcion 2
     // const consultaPrueba = async()=>{
@@ -25,35 +25,35 @@ const Administrador = () => {
     // }
     // consultaPrueba();
 
-  },[])
+  
+},[])
 
-  return (
-    <section className="container mainSection">
-      <div className="d-flex justify-content-between align-items-center mt-5">
-        <h1 className="display-4 ">Recetas disponibles</h1>
-        <Link className="btn btn-primary" to='/administrar/crear'>
-          Agregar
-        </Link>
-      </div>
-      <hr />
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>Cod</th>
-            <th>Receta</th>
-            <th>Duracion</th>
-            <th>URL de Imagen</th>
-            <th>Categoria</th>
-           <th>Opciones</th>
-           </tr>
-        </thead>
-        <tbody>
-          {
-            recetas.map((receta)=> <ItemReceta key={receta.id} receta={receta}></ItemReceta> )
-          }
-        </tbody>
-      </Table>
-    </section>
+return (
+    <div className="container ">
+        <div className="d-flex justify-content-between my-3">
+             <h2>Recetas Disponibles</h2>
+            <Link className="btn btn-primary" to="/administrar/crear">Agregar</Link>            
+        </div>
+    <Table className="tablaAdministrador" responsive striped bordered>          
+      <thead>                
+        <tr className="fila">
+          <th>Cod</th>
+          <th>Nombre</th>
+          <th>Dificultad</th>
+          <th>Categoría</th>
+          <th>Ingredientes</th>
+          <th>Pasos</th>
+          <th>URL de la Imagen</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+             recetas.map((receta)=> <ItemReceta key={receta._id} receta={receta} setRecetas={setRecetas}></ItemReceta> )
+        }
+     </tbody>
+    </Table>
+    </div>
   );
 };
 

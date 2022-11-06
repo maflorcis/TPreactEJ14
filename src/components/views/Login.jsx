@@ -4,9 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import {useState} from "react"
+import { consultarUsuarioAPI} from "../helpers/queries";
+import Swal from 'sweetalert2';
 
 
-function Login() {
+const Login = () => {
 
 
     // ESTO ES PARA EL PASSWORD
@@ -19,20 +21,40 @@ const [passwordShown, setPasswordShown] = useState(false);
   };
 
 
-const {register, handleSubmit, formState:{errors}} = useForm( 
+const {register, handleSubmit, formState:{errors}} = useForm(
   {defaultValues: {
     mail: "",
     password: "",
   }});
 
+
+//CONSULTA A LA API SI EXISTE EL USUARIO
 const onSubmit = (datos) =>{
-  console.log(datos)
+  // console.log(datos)
   console.log('desde nuestra función submit')
-}
-
-
-
-
+  const valueMail = 'datos del mail '+datos.mail
+  const valuePassword= 'datos del password '+datos.password
+  console.log(valueMail)
+  console.log(valuePassword)
+  consultarUsuarioAPI()
+      .then((respuestaUsuarios)=>{
+      console.log(respuestaUsuarios)
+      const isFound= respuestaUsuarios.some(element =>{
+      if (element.mail === datos.mail && element.password === datos.password){
+        return true
+        }
+        return false;
+      });
+      if (isFound){
+        Swal.fire('Usuario encontrado', 'Bienvenido', 'success')
+        console.log("Usuario encontrado")
+      }else{
+        Swal.fire('Usuario no encontrado', 'Verifique el usuario y/o contraseña', 'error')
+        console.log("Usuario no encontrado")
+      }
+      })
+                   
+    }
   return (
     <div className="container mainSection">
         <div>
@@ -43,8 +65,8 @@ const onSubmit = (datos) =>{
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="mb-3" controlId="mail">
         <Form.Label>Mail</Form.Label>
-        <Form.Control 
-        type="text" 
+        <Form.Control
+        type="text"
         placeholder="Ingrese el mail"
          {...register('mail',{
           required:'El mail es obligatorio',
@@ -53,32 +75,33 @@ const onSubmit = (datos) =>{
               message:'Debe ingresar un mail válido.'
           },
         })}
-        
+
        />
        <Form.Text className="text-danger">{errors.mail?.message}</Form.Text>
        </Form.Group>
-       <Form.Group className="mb-3" controlId="nuevoEmail">
-        
+       <Form.Group className="mb-3" controlId="nuevoPrecio">
+
         <Form.Label>Password</Form.Label>
-        <Form.Control 
-        type={passwordShown ? "text" : "password"} 
-        placeholder="Ingrese el password" 
+        <Form.Control
+        type={passwordShown ? "text" : "password"}
+        placeholder="Ingrese el password"
          {...register('password',{
           required:'Es obligatorio ingresar una password',
           pattern:{
               value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-              message:'La contraseña debe tener entre 8 carateres y contener al menos: 1 minúscula, 1 mayúscula y 1 número o 1 caracter especial.'
+              message:'La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial.'
           },
         })}
-        
+
          />
-         <button onClick={togglePassword}>Ver contraseña</button>
+          <button onClick={togglePassword}>Ver contraseña</button>
         <Form.Text className="text-danger">{errors.password?.message}</Form.Text>
-       </Form.Group>               
+       </Form.Group>
       <Button variant="primary" type="submit">
        Enviar
       </Button>
     </Form>
+   
     </div>
   );
 }

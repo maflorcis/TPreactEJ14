@@ -1,9 +1,39 @@
-#root{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.fila:nth-child(even){
+    background-color: #f2f2f2;
+    }
+    
+tr{
+    vertical-align: baseline;
+    }
+
+td{
+    font-size: small;
 }
 
-.mainSection{
-    flex-grow: 1;
+
+
+.overflow
+    {
+    max-width: 0;
+    overflow: hidden;
+     text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+    
+.overflow:hover{
+    max-height:unset;
+    overflow:visible;
+    text-overflow:unset;
+    white-space: initial; 
+         
+    }
+.tdImagen{
+    font-size: smaller;
+}
+.tdNombre{
+    font-weight: bold;
+}
+
+.tablaAdministrador{
+white-space: nowrap;
 }

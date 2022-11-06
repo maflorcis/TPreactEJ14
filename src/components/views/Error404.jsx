@@ -1,7 +1,10 @@
+import React from 'react';
+
+
 const Error404 = () => {
     return (
         <section className="mainSection">
-            <h1>pagina de error</h1>
+            <h1>Página Error 404</h1>
         </section>
     );
 };

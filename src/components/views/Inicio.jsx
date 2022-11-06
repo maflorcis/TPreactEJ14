@@ -1,28 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import CardReceta from './Producto/CardReceta';
+import CardReceta from './Receta/CardReceta';
 import { consultarAPI } from '../helpers/queries';
+import Spinner from '../common/Spinner'
 
 const Inicio = ({receta}) => {
+
+//Spinner
+const [mostrarSpinner, setMostrarSpinner] = useState(false)
+
+
     const [recetas, setRecetas]=useState([])
 
 useEffect  (()=>{
-
+setMostrarSpinner(true);
 consultarAPI().then((respuesta)=>{
 console.log(respuesta)
 setRecetas(respuesta)
+setMostrarSpinner(false);
 })
 
 },[])
 
+const mostrarComponente = (mostrarSpinner === true) ? (<Spinner></Spinner>):(
+             recetas.map((receta)=> <CardReceta key={receta._id} receta={receta} setRecetas={setRecetas}></CardReceta> )
+        )
 
     return (
-        <div className='mainSection'>
-            <h1 className="my-5 text-center">BIENVENIDOS</h1>
+        <div>
+            <h1 className="mt-3 text-center">DELICIAS CORDOBESAS</h1>
+            <h3 className="my-1 text-center">¡Recetas con mucho saaaaabor!</h3>
             <hr></hr>
-            <div className="row container">
-            {
-             recetas.map((receta)=> <CardReceta key={receta.id} receta={receta} setRecetas={setRecetas}></CardReceta> )
-        }
+            <div className="row">
+           {mostrarComponente}
             </div>
 
            
